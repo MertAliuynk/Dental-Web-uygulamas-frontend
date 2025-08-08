@@ -1,5 +1,5 @@
-export const dynamic = "force-dynamic";
 "use client";
+export const dynamic = "force-dynamic";
 import NewPatientPageClient from "./NewPatientPageClient";
 import AppLayout from "../../components/AppLayout";
 
