@@ -490,7 +490,7 @@ export default function FullAppointmentCalendar() {
         notes: createForm.notes
       });
 
-      const response = await fetch('http://localhost:8000/api/appointment', {
+  const response = await fetch('https://dentalapi.karadenizdis.com/api/appointment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

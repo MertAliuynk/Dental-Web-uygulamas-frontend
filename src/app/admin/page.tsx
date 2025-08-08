@@ -148,7 +148,7 @@ function UserManagement() {
   // Kullanıcıları getir
   const fetchUsers = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/user');
+  const res = await fetch('https://dentalapi.karadenizdis.com/api/user');
       const data = await res.json();
       if (data.success) {
         setUsers(data.data);
@@ -161,7 +161,7 @@ function UserManagement() {
   // Şubeleri getir
   const fetchBranches = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/branch');
+  const res = await fetch('https://dentalapi.karadenizdis.com/api/branch');
       const data = await res.json();
       if (data.success) {
         setBranches(data.data);
@@ -197,8 +197,8 @@ function UserManagement() {
 
     try {
       const url = editingUser 
-        ? `http://localhost:8000/api/user/${editingUser.user_id}`
-        : 'http://localhost:8000/api/user';
+        ? `https://dentalapi.karadenizdis.com/api/user/${editingUser.user_id}`
+        : 'https://dentalapi.karadenizdis.com/api/user';
       
       const method = editingUser ? 'PUT' : 'POST';
       
@@ -243,7 +243,7 @@ function UserManagement() {
     if (!confirm(`"${username}" kullanıcısını silmek istediğinizden emin misiniz?`)) return;
     
     try {
-      const res = await fetch(`http://localhost:8000/api/user/${userId}`, {
+  const res = await fetch(`https://dentalapi.karadenizdis.com/api/user/${userId}`, {
         method: 'DELETE'
       });
 
@@ -587,7 +587,7 @@ function TreatmentManagement() {
   // Tedavi türlerini getir
   const fetchTreatments = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/treatment-type');
+  const res = await fetch('https://dentalapi.karadenizdis.com/api/treatment-type');
       const data = await res.json();
       if (data.success) {
         setTreatments(data.data);
@@ -621,8 +621,8 @@ function TreatmentManagement() {
 
     try {
       const url = editingTreatment 
-        ? `http://localhost:8000/api/treatment-type/${editingTreatment.treatment_type_id}`
-        : 'http://localhost:8000/api/treatment-type';
+        ? `https://dentalapi.karadenizdis.com/api/treatment-type/${editingTreatment.treatment_type_id}`
+        : 'https://dentalapi.karadenizdis.com/api/treatment-type';
       
       const method = editingTreatment ? 'PUT' : 'POST';
       
@@ -666,7 +666,7 @@ function TreatmentManagement() {
     if (!confirm(`"${treatmentName}" tedavi türünü silmek istediğinizden emin misiniz?`)) return;
     
     try {
-      const res = await fetch(`http://localhost:8000/api/treatment-type/${treatmentId}`, {
+  const res = await fetch(`https://dentalapi.karadenizdis.com/api/treatment-type/${treatmentId}`, {
         method: 'DELETE'
       });
 
@@ -1015,7 +1015,7 @@ function PriceListManagement() {
   // Fiyat listelerini getir
   const fetchPriceLists = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/price-list');
+  const res = await fetch('https://dentalapi.karadenizdis.com/api/price-list');
       const data = await res.json();
       if (data.success) {
         setPriceLists(data.data);
@@ -1028,7 +1028,7 @@ function PriceListManagement() {
   // Tedavi türlerini getir
   const fetchTreatmentTypes = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/treatment-type');
+  const res = await fetch('https://dentalapi.karadenizdis.com/api/treatment-type');
       const data = await res.json();
       if (data.success) {
         setTreatmentTypes(data.data);
@@ -1041,7 +1041,7 @@ function PriceListManagement() {
   // Şubeleri getir
   const fetchBranches = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/branch');
+  const res = await fetch('https://dentalapi.karadenizdis.com/api/branch');
       const data = await res.json();
       if (data.success) {
         setBranches(data.data);
@@ -1076,8 +1076,8 @@ function PriceListManagement() {
 
     try {
       const url = editingPriceList 
-        ? `http://localhost:8000/api/price-list/${editingPriceList.price_list_id}`
-        : 'http://localhost:8000/api/price-list';
+        ? `https://dentalapi.karadenizdis.com/api/price-list/${editingPriceList.price_list_id}`
+        : 'https://dentalapi.karadenizdis.com/api/price-list';
       
       const method = editingPriceList ? 'PUT' : 'POST';
       
@@ -1124,7 +1124,7 @@ function PriceListManagement() {
   const handleEdit = async (priceList: any) => {
     try {
       // Fiyat listesi detayını kalemleri ile birlikte getir
-      const res = await fetch(`http://localhost:8000/api/price-list/${priceList.price_list_id}`);
+  const res = await fetch(`https://dentalapi.karadenizdis.com/api/price-list/${priceList.price_list_id}`);
       const data = await res.json();
       
       if (data.success) {
@@ -1163,7 +1163,7 @@ function PriceListManagement() {
     if (!confirm(`"${priceListName}" fiyat listesini ${statusText} yapmak istediğinizden emin misiniz?`)) return;
     
     try {
-      const res = await fetch(`http://localhost:8000/api/price-list/${priceListId}`, {
+  const res = await fetch(`https://dentalapi.karadenizdis.com/api/price-list/${priceListId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isActive: newStatus })
@@ -1187,7 +1187,7 @@ function PriceListManagement() {
     if (!confirm(`"${priceListName}" fiyat listesini silmek istediğinizden emin misiniz?`)) return;
     
     try {
-      const res = await fetch(`http://localhost:8000/api/price-list/${priceListId}`, {
+  const res = await fetch(`https://dentalapi.karadenizdis.com/api/price-list/${priceListId}`, {
         method: 'DELETE'
       });
 
@@ -1670,7 +1670,7 @@ function BranchManagement() {
 
   const fetchBranches = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/branch');
+  const res = await fetch('https://dentalapi.karadenizdis.com/api/branch');
       const data = await res.json();
       if (data.success) setBranches(data.data || []);
     } catch (e) {
@@ -1693,7 +1693,7 @@ function BranchManagement() {
     if (!form.name.trim()) { alert('Şube adı zorunludur'); return; }
     setLoading(true);
     try {
-      const url = editing ? `http://localhost:8000/api/branch/${editing.branch_id}` : 'http://localhost:8000/api/branch';
+  const url = editing ? `https://dentalapi.karadenizdis.com/api/branch/${editing.branch_id}` : 'https://dentalapi.karadenizdis.com/api/branch';
       const method = editing ? 'PUT' : 'POST';
       const res = await fetch(url, {
         method,
@@ -1721,7 +1721,7 @@ function BranchManagement() {
   const handleDelete = async (b: any) => {
     if (!confirm(`"${b.name}" şubesini silmek istediğinize emin misiniz?`)) return;
     try {
-      const res = await fetch(`http://localhost:8000/api/branch/${b.branch_id}`, { method: 'DELETE' });
+  const res = await fetch(`https://dentalapi.karadenizdis.com/api/branch/${b.branch_id}`, { method: 'DELETE' });
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.message || 'Silme başarısız');
       await fetchBranches();

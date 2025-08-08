@@ -71,7 +71,7 @@ export default function EditPatientModal({ isOpen, onClose, patient, onSave }: E
 
   const fetchBranches = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/branch");
+  const response = await fetch("https://dentalapi.karadenizdis.com/api/branch");
       const data = await response.json();
       if (data.success) {
         setBranches(data.data);
@@ -83,7 +83,7 @@ export default function EditPatientModal({ isOpen, onClose, patient, onSave }: E
 
   const fetchDoctors = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/user/doctors");
+  const response = await fetch("https://dentalapi.karadenizdis.com/api/user/doctors");
       const data = await response.json();
       if (data.success) {
         setDoctors(data.data);
@@ -104,7 +104,7 @@ export default function EditPatientModal({ isOpen, onClose, patient, onSave }: E
 
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/patient/${patient.patient_id}`, {
+  const response = await fetch(`https://dentalapi.karadenizdis.com/api/patient/${patient.patient_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
