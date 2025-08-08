@@ -5,11 +5,10 @@
   --foreground: #171717;
 }
 
-@theme inline {
+/* Theme aliases */
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +22,256 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Avoid horizontal page overflow on narrow screens */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Media should never overflow their containers */
+img, svg, canvas, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* App shell baseline */
+.app-shell {
+  min-height: 100vh;
+  background: #e3eafc;
+}
+
+.app-content {
+  min-height: 100vh;
+  margin-left: 240px; /* space for fixed sidebar on >= tablet */
+}
+
+/* Sidebar responsive behaviors */
+.sidebar { will-change: transform; }
+
+/* Hide mobile topbar and mobile bits on >=768px, show on <768px */
+@media (max-width: 767.98px) {
+  .mobile-topbar { display: flex !important; }
+  .sidebar-mobile-header { display: flex !important; }
+
+  /* Turn sidebar into drawer */
+  .sidebar {
+    transform: translateX(-100%);
+    width: 86vw !important;
+    max-width: 320px;
+  }
+  .sidebar[data-open="true"] {
+    transform: translateX(0);
+  }
+
+  /* Content takes full width */
+  .app-content {
+    margin-left: 0;
+    padding: 12px 12px 24px 12px;
+  }
+}
+
+/* Utility: responsive card grid that never overflows */
+.grid-auto-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 16px;
+}
+
+/* Utility: two columns on wide screens, stack on small */
+.two-col {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.two-col > .col {
+  flex: 1 1 320px;
+  min-width: 0; /* allow shrinking without overflow */
+}
+
+/* Utility: make control rows wrap when narrow */
+.wrap-when-narrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* React Big Calendar customizations - Ana sayfadaki gibi */
+.rbc-time-view .rbc-time-gutter .rbc-timeslot-group {
+  border-bottom: 1px solid #e1e5e9;
+}
+
+/* 30 dakika aralığında sadece saat başları için time label'ları göster (eski hali) */
+.rbc-time-view .rbc-time-gutter .rbc-time-slot:not(:first-child) .rbc-label {
+  display: none;
+}
+
+/* Saat başlarının stilini güçlendir */
+.rbc-time-view .rbc-time-gutter .rbc-time-slot:first-child .rbc-label {
+  font-weight: 600;
+  color: #1a237e;
+  font-size: 14px;
+}
+
+/* Calendar genel stilleri */
+.rbc-calendar {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.rbc-event {
+  background-color: #1a237e !important;
+  border: none !important;
+  color: white !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  padding: 4px 8px !important;
+}
+
+.rbc-event-label {
+  font-size: 12px !important;
+}
+
+.rbc-day-slot .rbc-time-slot {
+  border-top: 1px solid #f0f2f5;
+}
+
+.rbc-timeslot-group {
+  border-bottom: 2px solid #e1e5e9;
+}
+
+/* Time gutter genişliği */
+.rbc-time-view .rbc-time-gutter {
+  width: 80px;
+  background-color: #fafbfc;
+}
+
+/* Current time indicator */
+.rbc-current-time-indicator {
+  background-color: #ff4444;
+  height: 2px;
+  z-index: 3;
+}
+
+/* Drag & Drop Stili */
+.rbc-addons-dnd .rbc-addons-dnd-resizable-month-event {
+  border-left: 5px solid #1a237e;
+}
+
+.rbc-addons-dnd .rbc-addons-dnd-drag-preview {
+  opacity: 0.7;
+  transform: rotate(5deg);
+}
+
+.rbc-addons-dnd .rbc-addons-dnd-resize-ns-anchor {
+  background-color: #1a237e;
+  border: 1px solid #fff;
+  width: 100%;
+  height: 4px;
+  cursor: ns-resize;
+}
+
+.rbc-addons-dnd .rbc-addons-dnd-resize-ns-anchor:hover {
+  background-color: #0d1559;
+}
+
+/* Time slot'ların boyutu (eski hali) */
+.rbc-day-slot .rbc-time-slot {
+  border-top: 1px solid #f0f2f5;
+}
+
+.rbc-timeslot-group {
+  border-bottom: 2px solid #e1e5e9;
+}
+
+/* Time gutter genişliği */
+.rbc-time-view .rbc-time-gutter {
+  width: 80px;
+  background-color: #fafbfc;
+}
+
+/* Current time indicator */
+.rbc-current-time-indicator {
+  background-color: #ff4444;
+  height: 2px;
+  z-index: 3;
+}
+
+/* Drag & Drop Stili - Çok basit, animasyonsuz */
+.rbc-addons-dnd .rbc-addons-dnd-drag-preview {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.rbc-addons-dnd .rbc-addons-dnd-resize-ns-anchor {
+  background-color: #1a237e;
+  width: 100%;
+  height: 6px;
+  cursor: ns-resize;
+  z-index: 10;
+}
+
+/* Event'ler sürüklenirken - Hiç değişiklik yok */
+.rbc-event.rbc-addons-dnd-dragged-event {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+  z-index: 999 !important;
+}
+
+/* Resize handle'lar - Basit */
+.rbc-addons-dnd-resizable {
+  position: relative;
+}
+
+.rbc-addons-dnd-resizable::before,
+.rbc-addons-dnd-resizable::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: rgba(26, 35, 126, 0.3);
+  cursor: ns-resize;
+  z-index: 10;
+}
+
+.rbc-addons-dnd-resizable::before {
+  top: -3px;
+}
+
+.rbc-addons-dnd-resizable::after {
+  bottom: -3px;
+}
+
+.rbc-addons-dnd-resizable:hover::before,
+.rbc-addons-dnd-resizable:hover::after {
+  background: rgba(26, 35, 126, 0.5);
+}
+
+/* Tüm animasyonları kapat */
+.rbc-event * {
+  transition: none !important;
+  transform: none !important;
+}
+
+/* 15 dakikalık çizgileri hafif belirgin yap ve alanları büyüt */
+.rbc-time-slot {
+  border-bottom: 1px solid rgba(230, 230, 230, 0.4) !important;
+  min-height: 28px !important; 
+}
+
+/* Ana saat çizgilerini daha belirgin tut */
+.rbc-timeslot-group {
+  border-bottom: 1px solid #ddd !important;
+  min-height: 112px !important; 
+}
+
+/* Drag sırasında görünür kalması için */
+.rbc-event.rbc-addons-dnd-dragged-event {
+  opacity: 0.8 !important;
+  transform: none !important;
+  visibility: visible !important;
 }
