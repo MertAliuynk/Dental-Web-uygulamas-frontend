@@ -1,9 +1,20 @@
 "use client";
 
+
 import React, { useEffect, useState } from "react";
 
+type Appointment = {
+  appointment_time: string;
+  patient_first_name: string;
+  patient_last_name: string;
+  doctor_first_name?: string;
+  doctor_last_name?: string;
+  notes?: string;
+  // Diğer alanlar gerekiyorsa eklenebilir
+};
+
 export default function AppointmentCalendar() {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<Appointment[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [mounted, setMounted] = useState(false);
 
@@ -58,13 +69,13 @@ export default function AppointmentCalendar() {
   };
 
   // Get appointments for selected date
-  const getDayAppointments = () => {
+  const getDayAppointments = (): Appointment[] => {
     const dateStr = selectedDate.toDateString();
-    return events.filter((apt: any) => {
+    return events.filter((apt) => {
       const aptDate = new Date(apt.appointment_time);
       return aptDate.toDateString() === dateStr;
     });
-  };
+  } 
 
   if (!mounted) {
     return (
@@ -232,7 +243,7 @@ export default function AppointmentCalendar() {
         }}>
           {timeSlots.map(({ hour, minute }) => {
             const timeStr = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
-            const slotAppointment = dayAppointments.find((apt: any) => {
+            const slotAppointment = dayAppointments.find((apt) => {
               const aptTime = new Date(apt.appointment_time);
               return aptTime.getHours() === hour && aptTime.getMinutes() === minute;
             });
