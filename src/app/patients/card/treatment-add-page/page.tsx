@@ -1,6 +1,6 @@
 "use client";
 export const dynamic = "force-dynamic";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import AppLayout from "../../../components/AppLayout";
 import Topbar from "../../../components/Topbar";
@@ -36,7 +36,8 @@ type PendingItem = {
   priceDetails?: string | null;
 };
 
-export default function TreatmentAddPage() {
+function TreatmentAddPageClient() {
+  // ...tüm mevcut kodlarınız burada değişmeden kalacak...
   const searchParams = useSearchParams();
   const patientId = searchParams.get("id");
 
@@ -660,5 +661,13 @@ export default function TreatmentAddPage() {
         {error && <div style={{ color: "#e53935", marginTop: 12 }}>{error}</div>}
       </main>
     </AppLayout>
+  );
+}
+
+export default function TreatmentAddPage() {
+  return (
+    <Suspense fallback={<div>Yükleniyor...</div>}>
+      <TreatmentAddPageClient />
+    </Suspense>
   );
 }
