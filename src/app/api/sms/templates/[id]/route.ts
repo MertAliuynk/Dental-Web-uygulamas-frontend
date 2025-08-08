@@ -2,12 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dentalapi.karadenizdis.com';
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, context: { params: { id: string } }) {
   try {
     const body = await request.json();
     const token = process.env.API_TOKEN;
-    
-    const response = await fetch(`${API_BASE_URL}/api/sms/templates/${params.id}`, {
+    const { id } = context.params;
+    const response = await fetch(`${API_BASE_URL}/api/sms/templates/${id}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -31,11 +31,11 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, context: { params: { id: string } }) {
   try {
     const token = process.env.API_TOKEN;
-    
-    const response = await fetch(`${API_BASE_URL}/api/sms/templates/${params.id}`, {
+    const { id } = context.params;
+    const response = await fetch(`${API_BASE_URL}/api/sms/templates/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
