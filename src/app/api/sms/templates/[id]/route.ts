@@ -2,11 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://dentalapi.karadenizdis.com';
 
-export async function PUT(request: NextRequest, context: { params: { id: string } }) {
+export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
     const token = process.env.API_TOKEN;
-    const { id } = context.params;
+    const id = request.nextUrl.pathname.split('/').pop();
     const response = await fetch(`${API_BASE_URL}/api/sms/templates/${id}`, {
       method: 'PUT',
       headers: {
@@ -31,10 +31,10 @@ export async function PUT(request: NextRequest, context: { params: { id: string 
   }
 }
 
-export async function DELETE(request: NextRequest, context: { params: { id: string } }) {
+export async function DELETE(request: NextRequest) {
   try {
     const token = process.env.API_TOKEN;
-    const { id } = context.params;
+    const id = request.nextUrl.pathname.split('/').pop();
     const response = await fetch(`${API_BASE_URL}/api/sms/templates/${id}`, {
       method: 'DELETE',
       headers: {
