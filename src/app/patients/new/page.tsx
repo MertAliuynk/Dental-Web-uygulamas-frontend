@@ -1,3 +1,4 @@
+"use client";
 import NewPatientPageClient from "./NewPatientPageClient";
 import AppLayout from "../../components/AppLayout";
 
